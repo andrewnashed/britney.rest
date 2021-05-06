@@ -9,10 +9,14 @@ services:
       - flask_network
 
   nginx:
-    build: ngnix
+    build: nginx
     restart: always
     ports:
-      - 80:80
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d/conf:ro
+      - ./ssl:/etc/nginx/conf.d/ssl:ro
     networks:
       - flask_network
 
